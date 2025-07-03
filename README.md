@@ -4,23 +4,23 @@ This project implements a Backend-for-Frontend (BFF) proxy using Hono on Cloudfl
 
 ## Features
 
--   **Dify API Proxy**: Forwards POST requests to `https://api.dify.ai/v1/workflows/run`.
--   **Secure API Key Handling**: Dify API key is managed as a Cloudflare Worker secret (`DIFY_API_KEY`).
--   **Streaming Response**: Supports streaming responses from the Dify API.
--   **Health Check Endpoint**: A simple GET endpoint (`/`) for health checks.
--   **Built with Hono**: Lightweight and fast web framework for Workers.
--   **Deployed on Cloudflare Workers**: Serverless deployment for scalability and low latency.
+- **Dify API Proxy**: Forwards POST requests to `https://api.dify.ai/v1/workflows/run`.
+- **Secure API Key Handling**: Dify API key is managed as a Cloudflare Worker secret (`DIFY_API_KEY`).
+- **Streaming Response**: Supports streaming responses from the Dify API.
+- **Health Check Endpoint**: A simple GET endpoint (`/`) for health checks.
+- **Built with Hono**: Lightweight and fast web framework for Workers.
+- **Deployed on Cloudflare Workers**: Serverless deployment for scalability and low latency.
 
 ## Prerequisites
 
--   [Node.js](https://nodejs.org/)
--   [npm](https://www.npmjs.com/)
--   [Cloudflare Account](https://www.cloudflare.com/)
--   [Cloudflare Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/)
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+- [Cloudflare Account](https://www.cloudflare.com/)
+- [Cloudflare Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/)
 
 ## Setup
 
-1.  **Clone the repository (or create the project if you haven't already):**
+1. **Clone the repository (or create the project if you haven't already):**
 
     ```bash
     # If you are creating a new project
@@ -34,24 +34,24 @@ This project implements a Backend-for-Frontend (BFF) proxy using Hono on Cloudfl
     cd dify-bff-proxy
     ```
 
-2.  **Install dependencies:**
+2. **Install dependencies:**
 
     ```bash
     npm install
     ```
 
-3.  **Configure Dify API Key:**
+3. **Configure Dify API Key:**
 
     The Dify API key should be stored as a Cloudflare Worker secret. You will set this up for both local development and production deployment.
 
-    -   **For Local Development:**
+    - **For Local Development:**
 
         ```bash
         npx wrangler secret put DIFY_API_KEY
         # When prompted, enter your Dify API key (e.g., app-xxxxxxxxxxxxxxxxxxxx)
         ```
 
-    -   **For Production Deployment:**
+    - **For Production Deployment:**
 
         ```bash
         npx wrangler secret put DIFY_API_KEY --env production
@@ -70,14 +70,14 @@ This will start a local development server, usually accessible at `http://localh
 
 ### Testing Locally
 
--   **Health Check (GET):**
+- **Health Check (GET):**
 
     ```bash
     curl http://localhost:8787/
     # Expected output: {"ok":true}
     ```
 
--   **Dify API Proxy (POST):**
+- **Dify API Proxy (POST):**
 
     ```bash
     curl -X POST http://localhost:8787/ \
@@ -102,14 +102,14 @@ Wrangler will deploy your Worker, and you will get a URL like `https://your-work
 
 ### Testing Deployed Worker
 
--   **Health Check (GET):**
+- **Health Check (GET):**
 
     ```bash
     curl https://your-worker-name.your-account.workers.dev/
     # Expected output: {"ok":true}
     ```
 
--   **Dify API Proxy (POST):
+- **Dify API Proxy (POST):
 
     ```bash
     curl -X POST https://your-worker-name.your-account.workers.dev/ \
@@ -124,7 +124,7 @@ Wrangler will deploy your Worker, and you will get a URL like `https://your-work
 
 ## Project Structure
 
-```
+```txt
 dify-bff-proxy/
 ├── src/
 │   └── index.ts         # Main Hono application logic
@@ -137,9 +137,13 @@ dify-bff-proxy/
 
 This project is open-sourced under the MIT License. See the [LICENSE](LICENSE) file for details. (Note: A LICENSE file is not included in this example, but it's good practice to add one.)
 
+## work test
+
+```bash
 curl -X POST 'https://dify-bff-proxy.t-watanabe423.workers.dev/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "inputs": {"assessment": "test"},
     "user": "abc-123"
 }'
+```
